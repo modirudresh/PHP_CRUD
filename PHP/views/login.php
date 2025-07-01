@@ -1,21 +1,18 @@
 <?php
 session_start();
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Log in | Admin Panel</title>
   <link rel="shortcut icon" href="../dist/img/AdminLTELogo.png" type="image/x-icon" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-  <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <link rel="stylesheet" href="../dist/css/adminlte.min.css">
-  <link rel="stylesheet" href="../plugins/toastr/toastr.min.css">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css" />
+  <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css" />
+  <link rel="stylesheet" href="../dist/css/adminlte.min.css" />
+  <link rel="stylesheet" href="../plugins/toastr/toastr.min.css" />
   <style>
     * { box-sizing: border-box; font-size: 14px; }
     body {
@@ -35,46 +32,50 @@ session_start();
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form id="userForm" action="loginAction.php" method="post" novalidate>
-        <div class="input-group mb-1">
-          <input type="email"
-                 class="form-control <?= isset($_SESSION['login_error']) ? 'is-invalid' : '' ?>"
-                 id="email"
-                 name="email"
-                 placeholder="Enter email address"
-                 autocomplete="off"
-                 autocapitalize="off"
-                 spellcheck="false">
+      <form id="userForm" action="loginAction.php" method="post" novalidate onsubmit="handleRememberMeCookie()">
+        <div class="input-group mb-3">
+          <input
+            type="email"
+            class="form-control <?= isset($_SESSION['login_error']) ? 'is-invalid' : '' ?>"
+            id="email"
+            name="email"
+            placeholder="Enter email address"
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+          />
           <div class="input-group-append">
-            <div class="input-group-text"><span class="fas fa-envelope"></span></div>
+            <div class="input-group-text"><span class="fas fa-envelope" style="padding:1px;"></span></div>
           </div>
         </div>
 
-        <div class="input-group mb-1">
-          <input type="password"
-                 class="form-control password <?= isset($_SESSION['login_error']) ? 'is-invalid' : '' ?>"
-                 id="password"
-                 name="password"
-                 placeholder="Enter password"
-                 autocomplete="new-password"
-                 autocapitalize="off"
-                 spellcheck="false">
+        <div class="input-group mb-3">
+          <input
+            type="password"
+            class="form-control password <?= isset($_SESSION['login_error']) ? 'is-invalid' : '' ?>"
+            id="password"
+            name="password"
+            placeholder="Enter password"
+            autocomplete="new-password"
+            autocapitalize="off"
+            spellcheck="false"
+          />
           <div class="input-group-append">
-            <div class="input-group-text"><span class="fa fa-eye toggle icon" style="cursor: pointer;"></span></div>
+            <div class="input-group-text"><span class="fa fa-eye toggle icon" style="cursor: pointer; padding:0.5px;"></span></div>
           </div>
         </div>
 
         <?php if (isset($_SESSION['login_error'])): ?>
-          <div class="invalid-feedback d-block mb-2">Invalid email or password.</div>
+          <div class="invalid-feedback d-block mb-3">Invalid email or password.</div>
           <?php unset($_SESSION['login_error']); ?>
         <?php endif; ?>
 
         <div class="row mb-3 mt-2">
           <div class="col-8">
-            <!-- <div class="icheck-primary">
-              <input type="checkbox" id="remember" name="remember">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember" name="remember" />
               <label for="remember">Remember Me</label>
-            </div> -->
+            </div>
           </div>
           <div class="col-4">
             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
@@ -97,79 +98,120 @@ session_start();
 <script src="../plugins/toastr/toastr.min.js"></script>
 
 <script>
-$(function () {
-  $.validator.addMethod('pattern', function (value, element, param) {
-    return this.optional(element) || param.test(value);
-  }, 'Invalid format.');
+  const rememberCheckbox = document.getElementById("remember"),
+        emailInput = document.getElementById("email");
 
-  $('#userForm').validate({
-    rules: {
-      email: { required: true, email: true },
-      password: {
-        required: true,
-        minlength: 8,
-        pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/
-      }
-    },
-    messages: {
-      email: {
-        required: "Email is required",
-        email: "Invalid email/password."
-      },
-      password: {
-        required: "Password is required",
-        minlength: "Minimum 8 characters",
-        pattern: "Invalid email/password."
-      }
-    },
-    errorElement: 'span',
-    errorPlacement: function (error, element) {
-      error.addClass('invalid-feedback');
-      element.closest('.input-group').append(error);
-    },
-    highlight: function (element) {
-      $(element).addClass('is-invalid');
-    },
-    unhighlight: function (element) {
-      $(element).removeClass('is-invalid').addClass('is-valid');
+  const setCookie = (name, value, minutes) => {
+    const expiryDate = new Date();
+    expiryDate.setTime(expiryDate.getTime() + minutes * 60000);
+    document.cookie = `${name}=${encodeURIComponent(value)};expires=${expiryDate.toUTCString()};path=/`;
+  };
+
+  const getCookie = (name) => {
+    const cookieString = document.cookie.split('; ').find(row => row.startsWith(name + '='));
+    return cookieString ? decodeURIComponent(cookieString.split('=')[1]) : "";
+  };
+
+  const eraseCookie = (name) => {
+    document.cookie = `${name}=; Max-Age=0; path=/`;
+  };
+
+  // Prefill email and checkbox on load
+  window.addEventListener('DOMContentLoaded', () => {
+    const rememberedEmail = getCookie("rememberEmail");
+    if (rememberedEmail) {
+      rememberCheckbox.checked = true;
+      emailInput.value = rememberedEmail;
     }
   });
-});
+
+  function handleRememberMeCookie() {
+    if (rememberCheckbox.checked && emailInput.value !== "") {
+      setCookie("rememberEmail", emailInput.value, 30);
+    } else {
+      eraseCookie("rememberEmail");
+    }
+  }
 </script>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const toggle = document.querySelector(".toggle");
-  const input = document.querySelector(".password");
-  toggle.classList.add("fa-eye-slash");
-  toggle.addEventListener("click", () => {
-    if (input.type === "password") {
-      input.type = "text";
-      toggle.classList.replace("fa-eye-slash", "fa-eye");
-    } else {
-      input.type = "password";
-      toggle.classList.replace("fa-eye", "fa-eye-slash");
-    }
+  $(function () {
+    $.validator.addMethod(
+      "pattern",
+      function (value, element, param) {
+        return this.optional(element) || param.test(value);
+      },
+      "Invalid format."
+    );
+
+    $("#userForm").validate({
+      rules: {
+        email: { required: true, email: true },
+        password: {
+          required: true,
+          minlength: 8,
+          pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/,
+        },
+      },
+      messages: {
+        email: {
+          required: "Email is required",
+          email: "Invalid email/password.",
+        },
+        password: {
+          required: "Password is required",
+          minlength: "Minimum 8 characters",
+          pattern: "Invalid email/password.",
+        },
+      },
+      errorElement: "span",
+      errorPlacement: function (error, element) {
+        error.addClass("invalid-feedback");
+        element.closest(".input-group").append(error);
+      },
+      highlight: function (element) {
+        $(element).addClass("is-invalid");
+      },
+      unhighlight: function (element) {
+        $(element).removeClass("is-invalid").addClass("is-valid");
+      },
+    });
   });
+</script>
 
-  <?php if (isset($_SESSION['message'])): ?>
-    toastr.options = {
-      closeButton: true,
-      progressBar: true
-    };
-    toastr["<?= $_SESSION['status'] ?>"]("<?= addslashes($_SESSION['message']) ?>");
-    <?php unset($_SESSION['message'], $_SESSION['status']); ?>
-  <?php endif; ?>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.querySelector(".toggle");
+    const input = document.querySelector(".password");
+    toggle.classList.add("fa-eye-slash");
+    toggle.addEventListener("click", () => {
+      if (input.type === "password") {
+        input.type = "text";
+        toggle.classList.replace("fa-eye-slash", "fa-eye");
+      } else {
+        input.type = "password";
+        toggle.classList.replace("fa-eye", "fa-eye-slash");
+      }
+    });
 
-  <?php if (isset($_SESSION['logout_message'])): ?>
-    toastr.options = {
-      closeButton: true,
-      progressBar: true
-    };
-    toastr.info("<?= addslashes($_SESSION['logout_message']) ?>");
-    <?php unset($_SESSION['logout_message']); ?>
-  <?php endif; ?>
-});
+    <?php if (isset($_SESSION['message'])): ?>
+      toastr.options = {
+        closeButton: true,
+        progressBar: true,
+      };
+      toastr["<?= $_SESSION['status'] ?>"]("<?= addslashes($_SESSION['message']) ?>");
+      <?php unset($_SESSION['message'], $_SESSION['status']); ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['logout_message'])): ?>
+      toastr.options = {
+        closeButton: true,
+        progressBar: true,
+      };
+      toastr.info("<?= addslashes($_SESSION['logout_message']) ?>");
+      <?php unset($_SESSION['logout_message']); ?>
+    <?php endif; ?>
+  });
 </script>
 
 </body>

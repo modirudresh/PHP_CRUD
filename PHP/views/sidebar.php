@@ -45,83 +45,128 @@ $currentPath = $_SERVER['SCRIPT_NAME'];
     </div>
 
     <nav class="mt-2">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        
-        <li class="nav-item">
-          <a href="../../AJAX_CRUD/src/dashboard.php" class="nav-link <?= $currentFile === 'dashboard.php' ? 'active' : '' ?>">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>Dashboard</p>
-          </a>
-        </li>
-        <?php
-            if (isset($_SESSION['user_id'])) {
-           ?>
-        <li class="nav-item <?= strpos($currentPath, '/Ajax_oop_student/') !== false || strpos($currentPath, '/Ajax_oop_user/') !== false ? 'menu-open' : '' ?>">
-          <a href="#" class="nav-link <?= strpos($currentPath, '/Ajax_oop_student/') !== false || strpos($currentPath, '/Ajax_oop_user/') !== false ? 'active' : '' ?>">
-            <i class="nav-icon fas fa-code"></i>
-            <p>Crud using Ajax<i class="right fas fa-angle-left"></i></p>
-          </a>
-          <ul class="nav nav-treeview">
-            
-            <li class="nav-item <?= strpos($currentPath, '/Ajax_oop_student/') !== false ? 'menu-open' : '' ?>">
-              <a href="#" class="nav-link <?= strpos($currentPath, '/Ajax_oop_student/') !== false ? 'active' : '' ?>">
-                <i class="nav-icon fas fa-users-cog"></i>
-                <p>Student Administration<i class="right fas fa-angle-left"></i></p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="../../AJAX_CRUD/Ajax_oop_student/index.php" class="nav-link <?= $currentFile === 'index.php' && strpos($currentPath, '/Ajax_oop_student/') !== false ? 'active' : '' ?>">
-                    <i class="fas fa-list-alt nav-icon"></i>
-                    <p>Manage Students</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../../AJAX_CRUD/Ajax_oop_student/create.php" class="nav-link <?= $currentFile === 'create.php' && strpos($currentPath, '/Ajax_oop_student/') !== false ? 'active' : '' ?>">
-                    <i class="fas fa-user-plus nav-icon"></i>
-                    <p>Add New Student</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
+  <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-            <li class="nav-item <?= strpos($currentPath, '/Ajax_oop_user/') !== false ? 'menu-open' : '' ?>">
-              <a href="#" class="nav-link <?= strpos($currentPath, '/Ajax_oop_user/') !== false ? 'active' : '' ?>">
-                <i class="nav-icon fas fa-users-cog"></i>
-                <p>User Administration<i class="right fas fa-angle-left"></i></p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="../../AJAX_CRUD/Ajax_oop_user/index.php" class="nav-link <?= $currentFile === 'index.php' && strpos($currentPath, '/Ajax_oop_user/') !== false ? 'active' : '' ?>">
-                    <i class="fas fa-list-alt nav-icon"></i>
-                    <p>Manage Users</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../../AJAX_CRUD/Ajax_oop_user/create.php" class="nav-link <?= $currentFile === 'create.php' && strpos($currentPath, '/Ajax_oop_user/') !== false ? 'active' : '' ?>">
-                    <i class="fas fa-user-plus nav-icon"></i>
-                    <p>Add New User</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-          </ul>
-        </li>
-
-        <li class="nav-item <?= strpos($currentPath, '/user/') !== false ? 'menu-open' : '' ?>">
-          <a href="#" class="nav-link <?= strpos($currentPath, '/user/') !== false ? 'active' : '' ?>">
-            <i class="nav-icon fas fa-code"></i>
-            <p>Basic php crud<i class="right fas fa-angle-left"></i></p>
+    <li class="nav-item">
+      <a href="../../AJAX_CRUD/src/dashboard.php" class="nav-link <?= $currentFile === 'dashboard.php' ? 'active' : '' ?>">
+        <i class="nav-icon fas fa-home"></i>
+        <p>Dashboard</p>
+      </a>
+    </li>
+    <?php if (isset($_SESSION['user_id'])): ?>
+    <li class="nav-item <?= strpos($currentPath, '/Ajax_oop_student/') !== false || strpos($currentPath, '/Ajax_oop_user/') !== false ? 'menu-open' : '' ?>">
+      <a href="#" class="nav-link <?= strpos($currentPath, '/Ajax_oop_student/') !== false || strpos($currentPath, '/Ajax_oop_user/') !== false ? 'active' : '' ?>">
+        <i class="nav-icon fas fa-robot"></i>
+        <p>Crud using Ajax<i class="right fas fa-angle-left"></i></p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item <?= strpos($currentPath, '/Ajax_oop_student/') !== false ? 'menu-open' : '' ?>">
+          <a href="#" class="nav-link <?= strpos($currentPath, '/Ajax_oop_student/') !== false ? 'active' : '' ?>">
+            <i class="nav-icon fas fa-user-graduate"></i>
+            <p>Student Administration<i class="right fas fa-angle-left"></i></p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="../../Basic_crud/user/index.php" class="nav-link <?= $currentFile === 'index.php' && strpos($currentPath, '/Basic_crud/') !== false ? 'active' : '' ?>">
-                <i class="fas fa-list-alt nav-icon"></i>
+              <a href="../../AJAX_CRUD/Ajax_oop_student/index.php" class="nav-link <?= $currentFile === 'index.php' && strpos($currentPath, '/Ajax_oop_student/') !== false ? 'active' : '' ?>">
+                <i class="fas fa-list nav-icon"></i>
+                <p>Manage Students</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../../AJAX_CRUD/Ajax_oop_student/create.php" class="nav-link <?= $currentFile === 'create.php' && strpos($currentPath, '/Ajax_oop_student/') !== false ? 'active' : '' ?>">
+                <i class="fas fa-user-plus nav-icon"></i>
+                <p>Add New Student</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item <?= strpos($currentPath, '/Ajax_oop_user/') !== false ? 'menu-open' : '' ?>">
+          <a href="#" class="nav-link <?= strpos($currentPath, '/Ajax_oop_user/') !== false ? 'active' : '' ?>">
+            <i class="nav-icon fas fa-users"></i>
+            <p>User Administration<i class="right fas fa-angle-left"></i></p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="../../AJAX_CRUD/Ajax_oop_user/index.php" class="nav-link <?= $currentFile === 'index.php' && strpos($currentPath, '/Ajax_oop_user/') !== false ? 'active' : '' ?>">
+                <i class="fas fa-list nav-icon"></i>
                 <p>Manage Users</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="../../Basic_crud/user/create.php" class="nav-link <?= $currentFile === 'create.php' && strpos($currentPath, '/Basic_crud/') !== false ? 'active' : '' ?>">
+              <a href="../../AJAX_CRUD/Ajax_oop_user/create.php" class="nav-link <?= $currentFile === 'create.php' && strpos($currentPath, '/Ajax_oop_user/') !== false ? 'active' : '' ?>">
+                <i class="fas fa-user-plus nav-icon"></i>
+                <p>Add New User</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+    <li class="nav-item <?= strpos($currentPath, '/user/') !== false ? 'menu-open' : '' ?>">
+      <a href="#" class="nav-link <?= strpos($currentPath, '/user/') !== false ? 'active' : '' ?>">
+        <i class="nav-icon fas fa-database"></i>
+        <p>Basic php crud<i class="right fas fa-angle-left"></i></p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="../../Basic_crud/user/index.php" class="nav-link <?= $currentFile === 'index.php' && strpos($currentPath, '/Basic_crud/') !== false ? 'active' : '' ?>">
+            <i class="fas fa-list nav-icon"></i>
+            <p>Manage Users</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="../../Basic_crud/user/create.php" class="nav-link <?= $currentFile === 'create.php' && strpos($currentPath, '/Basic_crud/') !== false ? 'active' : '' ?>">
+            <i class="fas fa-user-plus nav-icon"></i>
+            <p>Add New User</p>
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="nav-item <?= strpos($currentPath, '/OOP_CRUD_LTE/') !== false ? 'menu-open' : '' ?>">
+      <a href="#" class="nav-link <?= strpos($currentPath, '/OOP_CRUD_LTE/') !== false ? 'active' : '' ?>">
+        <i class="nav-icon fas fa-cogs"></i>
+        <p>OOP Crud without Ajax<i class="right fas fa-angle-left"></i></p>
+      </a>
+      <ul class="nav nav-treeview">
+
+        <li class="nav-item <?= strpos($currentPath, '/OOP_crud_student/') !== false ? 'menu-open' : '' ?>">
+          <a href="#" class="nav-link <?= strpos($currentPath, '/OOP_crud_student/') !== false ? 'active' : '' ?>">
+            <i class="nav-icon fas fa-user-graduate"></i>
+            <p>Student Administration<i class="right fas fa-angle-left"></i></p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="../../OOP_CRUD_LTE/OOP_crud_student/index.php" class="nav-link <?= $currentFile === 'index.php' && strpos($currentPath, '/OOP_crud_student/') !== false ? 'active' : '' ?>">
+                <i class="fas fa-list nav-icon"></i>
+                <p>Manage Students</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../../OOP_CRUD_LTE/OOP_crud_student/create.php" class="nav-link <?= $currentFile === 'create.php' && strpos($currentPath, '/OOP_crud_student/') !== false ? 'active' : '' ?>">
+                <i class="fas fa-user-plus nav-icon"></i>
+                <p>Add New Student</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item <?= strpos($currentPath, '/OOP_CRUD_user/') !== false ? 'menu-open' : '' ?>">
+          <a href="#" class="nav-link <?= strpos($currentPath, '/OOP_CRUD_user/') !== false ? 'active' : '' ?>">
+            <i class="nav-icon fas fa-users"></i>
+            <p>User Administration<i class="right fas fa-angle-left"></i></p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="../../OOP_CRUD_LTE/OOP_CRUD_user/index.php" class="nav-link <?= $currentFile === 'index.php' && strpos($currentPath, '/OOP_CRUD_user/') !== false ? 'active' : '' ?>">
+                <i class="fas fa-list nav-icon"></i>
+                <p>Manage Users</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../../OOP_CRUD_LTE/OOP_CRUD_user/create.php" class="nav-link <?= $currentFile === 'create.php' && strpos($currentPath, '/OOP_CRUD_user/') !== false ? 'active' : '' ?>">
                 <i class="fas fa-user-plus nav-icon"></i>
                 <p>Add New User</p>
               </a>
@@ -129,64 +174,17 @@ $currentPath = $_SERVER['SCRIPT_NAME'];
           </ul>
         </li>
 
-        <li class="nav-item <?= strpos($currentPath, '/OOP_CRUD_LTE/') !== false || strpos($currentPath, '/OOP_CRUD_LTE/') !== false ? 'menu-open' : '' ?>">
-          <a href="#" class="nav-link <?= strpos($currentPath, '/OOP_CRUD_LTE/') !== false || strpos($currentPath, '/OOP_CRUD_LTE/') !== false ? 'active' : '' ?>">
-            <i class="nav-icon fas fa-code"></i>
-            <p>OOP Crud without Ajax<i class="right fas fa-angle-left"></i></p>
-          </a>
-          <ul class="nav nav-treeview">
-
-            <li class="nav-item <?= strpos($currentPath, '/OOP_crud_student/') !== false ? 'menu-open' : '' ?>">
-              <a href="#" class="nav-link <?= strpos($currentPath, '/OOP_crud_student/') !== false ? 'active' : '' ?>">
-                <i class="nav-icon fas fa-users-cog"></i>
-                <p>Student Administration<i class="right fas fa-angle-left"></i></p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="../../OOP_CRUD_LTE/OOP_crud_student/index.php" class="nav-link <?= $currentFile === 'index.php' && strpos($currentPath, '/OOP_crud_student/') !== false ? 'active' : '' ?>">
-                    <i class="fas fa-list-alt nav-icon"></i>
-                    <p>Manage Students</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../../OOP_CRUD_LTE/OOP_crud_student/create.php" class="nav-link <?= $currentFile === 'create.php' && strpos($currentPath, '/OOP_crud_student/') !== false ? 'active' : '' ?>">
-                    <i class="fas fa-user-plus nav-icon"></i>
-                    <p>Add New Student</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-            <li class="nav-item <?= strpos($currentPath, '/OOP_CRUD_user/') !== false ? 'menu-open' : '' ?>">
-              <a href="#" class="nav-link <?= strpos($currentPath, '/OOP_CRUD_user/') !== false ? 'active' : '' ?>">
-                <i class="nav-icon fas fa-users-cog"></i>
-                <p>User Administration<i class="right fas fa-angle-left"></i></p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="../../OOP_CRUD_LTE/OOP_CRUD_user/index.php" class="nav-link <?= $currentFile === 'index.php' && strpos($currentPath, '/OOP_CRUD_user/') !== false ? 'active' : '' ?>">
-                    <i class="fas fa-list-alt nav-icon"></i>
-                    <p>Manage Users</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../../OOP_CRUD_LTE/OOP_CRUD_user/create.php" class="nav-link <?= $currentFile === 'create.php' && strpos($currentPath, '/OOP_CRUD_user/') !== false ? 'active' : '' ?>">
-                    <i class="fas fa-user-plus nav-icon"></i>
-                    <p>Add New User</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-          </ul>
-        </li>
-        <?php
-            } else {
-              echo "<div class='alert alert-warning' style='min-height: 100px; margin-top:10px;'>Please log in to view the user list.<br><a href='../../login.php' class='btn btn-primary' style='text-decoration:none;'>Login</a></div>";
-            }
-?>
       </ul>
-    </nav>
+    </li>
+    <?php else: ?>
+      <div class="alert alert-warning" style="min-height: 100px; margin-top:10px;">
+        Please log in to view the user list.<br>
+        <a href='../../login.php' class='btn btn-primary' style='text-decoration:none;'>Login</a>
+      </div>
+    <?php endif; ?>
+  </ul>
+</nav>
+
   </div>
 </aside>
 <div class="content-wrapper">
