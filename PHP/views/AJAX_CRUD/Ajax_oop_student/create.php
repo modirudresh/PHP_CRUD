@@ -1,0 +1,113 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../../login.php");
+    exit;
+}
+include_once("createaction.php");
+include_once("../../header.php");
+include_once("../../sidebar.php");
+?>
+
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0"></h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                        <li class="breadcrumb-item active">Add Student</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <section class="content">
+            <div class="container-fluid">
+                    <div class="card card-primary">
+                    <div class="card-header"><h3 class="card-title">Add Student</h3></div>
+
+                    <form id="userForm">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="first_name">First Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="first_name" name="first_name"
+                                        value="<?= htmlspecialchars($_SESSION['formData']['first_name'] ?? '') ?>" placeholder="Enter first name">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="last_name">Last Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="last_name" name="last_name"
+                                        value="<?= htmlspecialchars($_SESSION['formData']['last_name'] ?? '') ?>" placeholder="Enter last name">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="email">Email <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        value="<?= htmlspecialchars($_SESSION['formData']['email'] ?? '') ?>" placeholder="Enter email" autocomplete="off">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="phone_no">Phone Number <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="phone_no" name="phone_no"
+                                        value="<?= htmlspecialchars($_SESSION['formData']['phone_no'] ?? '') ?>"
+                                        placeholder="Enter 10-digit number" autocomplete="off" maxlength="10">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address <span class="text-danger">*</span></label>
+                                <textarea class="form-control" id="address" name="address" rows="4"
+                                    placeholder="Enter your address"><?= htmlspecialchars($_SESSION['formData']['address'] ?? '') ?></textarea>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="float-end">
+                                <a href="index.php" class="btn btn-secondary">Cancel</a>
+                                <button type="submit" class="btn btn-primary float-right">Create</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script>
+$(function () {
+    $('#userForm').on('submit', function (e) {
+        e.preventDefault();
+        var form = this;
+        if (!$(form).valid()) return;
+        var formData = new FormData(form);
+        var submitBtn = $(form).find('button[type="submit"]');
+        submitBtn.prop('disabled', true).text('Submitting...');
+        $.ajax({
+            url: 'create.php',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (res) {
+                if (res.status === 'success') {
+                    toastr.success(res.message);
+                    setTimeout(() => location.href = 'index.php', 1500);
+                } else {
+                    toastr.error(res.message);
+                }
+            },
+            complete: function() {
+                submitBtn.prop('disabled', false).text('Create');
+            }
+        });
+    });
+});
+</script>
+
+<?php include_once("../../footer.php"); ?>
