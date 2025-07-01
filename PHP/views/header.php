@@ -99,8 +99,6 @@ if (!isset($_SESSION['user_id'])) {
             Hello, <strong><?= htmlspecialchars($_SESSION['user_name']) ?></strong>
           </span>
           <div class="dropdown-divider"></div>
-          <a href="../change_password.php" class="dropdown-item"><i class="fas fa-key mr-2"></i> Change Password</a>
-          <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item" data-toggle="modal" data-target="#logoutModal"><i class="fas fa-sign-out-alt mr-2"></i> Logout</a>
         </div>
       </li>
