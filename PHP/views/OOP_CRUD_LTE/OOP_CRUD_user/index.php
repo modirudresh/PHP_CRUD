@@ -14,7 +14,7 @@ include_once("../../sidebar.php");
 <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1 class="m-0">Add New User</h1>
+            <h1 class="m-0"></h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -51,7 +51,7 @@ include_once("../../sidebar.php");
             <div class="card-header">
                 <div class="row">
                     <h2 class="col-md-9 m-auto pl-4"></h2>
-                    <a href="create.php" class="btn btn-primary px-4 col-md-3 m-auto">Add New User</a>
+                    <a href="create.php" class="btn btn-primary px-4">Add User</a>
                 </div>
             </div>
             <div class="card-body">

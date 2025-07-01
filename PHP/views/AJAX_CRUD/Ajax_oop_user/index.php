@@ -25,13 +25,13 @@ include_once("../../sidebar.php");
 <section class="content">
     <div class="container-fluid">
         <div class="card">
-        <div class="card-header">
+            <div class="card-header">
                 <div class="row">
                     <h2 class="col-md-9 m-auto pl-4"></h2>
                     <a href="create.php" class="btn btn-primary px-4">Add User</a>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body" id="userTableContainer">
                 <table id="userTable" class="table table-bordered table-striped table-hover text-center">
                     <thead class="table-dark text-center">
                         <tr>
@@ -124,8 +124,7 @@ include_once("../../sidebar.php");
     </div>
 
 </section>
-</div>
-</div>
+
 <?php include_once("../../footer.php"); ?>
 
 <script>
@@ -150,16 +149,50 @@ $(document).on('click', '.editUserBtn', function () {
     const userId = $(this).data('id');
     $('#editUserModal').modal('show');
     $('#editUserContent').html('<div class="text-center text-muted">Loading...</div>');
-
     $.ajax({
         url: 'edit.php',
         type: 'GET',
         data: { id: userId },
-        success: function (data) {
-            $('#editUserContent').html(data);
+        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+        success: function (formHtml) {
+            $('#editUserContent').html(formHtml);
         },
         error: function () {
             $('#editUserContent').html('<div class="text-danger text-center">Failed to load content.</div>');
+        }
+    });
+});
+
+$(document).on('submit', '#editUserForm', function (e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    $.ajax({
+        url: 'edit.php',
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+        success: function (res) {
+            if (res.status === 'success') {
+                toastr.success(res.message);
+                $('#editUserModal').modal('hide');
+                $.ajax({
+                    url: 'indexaction.php',
+                    type: 'GET',
+                    success: function (html) {
+                        $('#userTableContainer').html($(html).find('#userTableContainer').html());
+                    },
+                    error: function () {
+                        toastr.error('Failed to reload user table.');
+                    }
+                });
+            } else {
+                toastr.error(res.message);
+            }
+        },
+        error: function () {
+            toastr.error('An error occurred');
         }
     });
 });

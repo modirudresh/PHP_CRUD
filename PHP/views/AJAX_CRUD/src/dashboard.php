@@ -70,9 +70,9 @@ include_once("../../sidebar.php");
         <p> <small>            crud without ajax          </small> Students</p>          
         </div>
           <div class="icon">
-            <i class="ion ion-person-add"></i>
+          <i class="ion ion-university"></i>
           </div>
-          <a href="../Ajax_oop_user/index.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <a href="../../OOP_CRUD_LTE/OOP_crud_student/index.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
     </div>

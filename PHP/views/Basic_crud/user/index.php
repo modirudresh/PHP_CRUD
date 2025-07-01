@@ -110,13 +110,13 @@ if (!isset($_SESSION['user_id'])) {
                     ?>
                   </td>
                   <td class="text-center">
-                    <a href="view.php?id=<?= urlencode($res['id']) ?>" class="btn btn-info btn-xs me-3" title="View User" aria-label="View User" style="font-size:1.2rem;">
+                    <a href="view.php?id=<?= urlencode($res['id']) ?>" class="btn btn-info p-1" title="View User" aria-label="View User">
                       <i class="fa fa-eye"></i>
                     </a>
-                    <a href="edit.php?id=<?= urlencode($res['id']) ?>" class="btn btn-warning btn-xs me-3" title="Edit User" aria-label="Edit User" style="font-size:1.2rem;">
+                    <a href="edit.php?id=<?= urlencode($res['id']) ?>" class="btn btn-warning p-1" title="Edit User" aria-label="Edit User">
                       <i class="fa fa-edit"></i>
                     </a>
-                    <a href="#" class="btn btn-danger btn-xs me-3" title="Delete User" aria-label="Delete User" style="font-size:1.2rem;" data-bs-toggle="modal" data-bs-target="#deleteModal<?= htmlspecialchars($res['id']) ?>">
+                    <a href="#" class="btn btn-danger p-1" title="Delete User" aria-label="Delete User" data-bs-toggle="modal" data-bs-target="#deleteModal<?= htmlspecialchars($res['id']) ?>">
                       <i class="fa fa-trash"></i>
                     </a>
 
@@ -177,12 +177,9 @@ if (!isset($_SESSION['user_id'])) {
 <!-- jQuery UI -->
 <script src="../../../plugins/jquery-ui/jquery-ui.min.js"></script>
 <script>$.widget.bridge('uibutton', $.ui.button);</script>
-<!-- Bootstrap 4 -->
-<script src="../../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- Toastr -->
 <script src="../../../plugins/toastr/toastr.min.js"></script>
-<!-- AdminLTE -->
-<script src="../../../dist/js/adminlte.js"></script>
+
 
 <script>
     $(function () {

@@ -98,7 +98,7 @@ if (!isset($_SESSION['user_id'])) {
     }
 
     if ($('#studentTable').length) {
-      initializeTable('#studentTable', [{ orderable: false, targets: [3, 6] }]);
+      initializeTable('#studentTable', [{ orderable: false, targets: [3, 4] }]);
     }
 
     bsCustomFileInput.init();

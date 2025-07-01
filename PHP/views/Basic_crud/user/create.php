@@ -198,11 +198,9 @@ $message = $_SESSION['message'] ?? '';
 unset($_SESSION['formData'], $_SESSION['errors'], $_SESSION['status'], $_SESSION['message']);
 ?>
 
+
 <?php include('../../footer.php'); ?>
 
-
-<script src="../../../plugins/jquery/jquery.min.js"></script>
-<script src="../../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../../../plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="../../../plugins/jquery-validation/additional-methods.min.js"></script>
 <script src="../../../plugins/moment/moment.min.js"></script>
@@ -362,20 +360,6 @@ unset($_SESSION['formData'], $_SESSION['errors'], $_SESSION['status'], $_SESSION
   .is-invalid { border: 2px solid #dc3545; }
 </style>
 
-<script>
-    const toggle = document.querySelector(".toggle"),
-        input = document.querySelector(".password");
-
-    toggle.addEventListener("click", () => {
-        if (input.type === "password") {
-            input.type = "text";
-            toggle.classList.replace("fa-eye-slash", "fa-eye");
-        } else {
-            input.type = "password";
-            toggle.classList.replace("fa-eye", "fa-eye-slash");
-        }
-    });
-  </script>
 <?php if (!empty($message)) : ?>
 <script>
     $(function () {
