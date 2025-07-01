@@ -176,20 +176,7 @@ $(document).ready(function () {
                 if (res.status === 'success') {
                     toastr.success(res.message);
                     $('#editUserModal').modal('hide');
-
-                    const userId = formData.get('id');
-
-                    $.ajax({
-                        url: 'index.php',
-                        type: 'GET',
-                        data: { id: userId },
-                        success: function (rowHtml) {
-                            $('#user-row-' + userId).replaceWith(rowHtml);
-                        },
-                        error: function () {
-                            toastr.error('Failed to update user row.');
-                        }
-                    });
+                    setTimeout(() => window.location.reload(), 0.1);
                 } else {
                     toastr.error(res.message);
                 }
@@ -216,6 +203,5 @@ $(document).ready(function () {
         }
     });
 });
-
 </script>
 

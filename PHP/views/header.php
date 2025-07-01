@@ -46,9 +46,9 @@ if (!isset($_SESSION['user_id'])) {
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-  <div class="preloader flex-column justify-content-center align-items-center">
+  <!-- <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="../../../dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-  </div>
+  </div> -->
 
   <nav class="main-header navbar navbar-expand navbar-white navbar-light sticky-top">
     <ul class="navbar-nav">
